@@ -22,7 +22,7 @@ public class CameraMoviment : MonoBehaviour
             float mouseX = Input.GetAxis("Mouse X") * rotationSpeed;
 
             // Rotaciona o objeto alvo
-            target.Rotate(Vector3.up, mouseX);
+            target.Rotate(Vector3.down, mouseX);
 
             // Mantenha a posição da câmera em relação ao objeto
             transform.position = target.position + offset;
