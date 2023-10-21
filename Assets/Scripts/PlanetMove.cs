@@ -6,11 +6,6 @@ public class PlanetMove : MonoBehaviour
 {
     public Transform transform;
     public float spdEarth;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
     // Update is called once per frame
     void Update()
