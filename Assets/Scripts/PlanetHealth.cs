@@ -6,6 +6,9 @@ using System.Linq;
 
 public class PlanetHealth : MonoBehaviour
 {
+    public GameManager gameManager;
+
+
     public int _currentHealth = 10;
 
     // Game Object of landmasses, used to change color as planet loses health
@@ -20,6 +23,8 @@ public class PlanetHealth : MonoBehaviour
     public GameObject heartsUI;
     public GameObject heartPrefab;
 
+    private bool canInput = false;
+
     public int Health {
         get {
             return _currentHealth;
@@ -32,13 +37,13 @@ public class PlanetHealth : MonoBehaviour
             Debug.Log("New Health: " + _currentHealth);
 
             // Change Land Masses Color according to planet health
-            switch(Health){
-                case <= 0: landMasses.GetComponent<MeshRenderer>().sharedMaterial = materialHealth0; break;
-                case < 2: landMasses.GetComponent<MeshRenderer>().sharedMaterial = materialHealth25; break;
-                case < 5: landMasses.GetComponent<MeshRenderer>().sharedMaterial = materialHealth50; break;
-                case < 8: landMasses.GetComponent<MeshRenderer>().sharedMaterial = materialHealth75; break;
-                default: landMasses.GetComponent<MeshRenderer>().sharedMaterial = materialHealth100; break;
-            }
+            //switch(Health){
+            //    case <= 0: landMasses.GetComponent<MeshRenderer>().sharedMaterial = materialHealth0; break;
+            //    case < 2: landMasses.GetComponent<MeshRenderer>().sharedMaterial = materialHealth25; break;
+            //    case < 5: landMasses.GetComponent<MeshRenderer>().sharedMaterial = materialHealth50; break;
+            //    case < 8: landMasses.GetComponent<MeshRenderer>().sharedMaterial = materialHealth75; break;
+            //    default: landMasses.GetComponent<MeshRenderer>().sharedMaterial = materialHealth100; break;
+            //}
             
             // Get all current hearts
             GameObject[] hearts = GameObject.FindGameObjectsWithTag("Heart");
@@ -60,14 +65,29 @@ public class PlanetHealth : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        gameManager = FindAnyObjectByType<GameManager>();
+        gameManager.GameStateChanged += OnGameStateChanged;
         Health = 10;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetMouseButtonDown(0)){
+        if (Input.GetMouseButtonDown(0) && canInput){
             this.Health--;
+        }
+    }
+
+    public void OnGameStateChanged(GameManager.GameState state)
+    {
+        Debug.Log(state.ToString());
+        if (state == GameManager.GameState.PLAYING)
+        {
+            canInput = true;
+        }
+        else
+        {
+            canInput = false;
         }
     }
 }

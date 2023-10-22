@@ -15,5 +15,6 @@ public class MinigameClick : MonoBehaviour
     public void ClickOn()
     {
         Minegame.gameObject.SetActive(true);
+        Destroy(this.gameObject);
     }
 }
