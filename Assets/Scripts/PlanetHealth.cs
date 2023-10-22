@@ -37,13 +37,13 @@ public class PlanetHealth : MonoBehaviour
             Debug.Log("New Health: " + _currentHealth);
 
             // Change Land Masses Color according to planet health
-            //switch(Health){
-            //    case <= 0: landMasses.GetComponent<MeshRenderer>().sharedMaterial = materialHealth0; break;
-            //    case < 2: landMasses.GetComponent<MeshRenderer>().sharedMaterial = materialHealth25; break;
-            //    case < 5: landMasses.GetComponent<MeshRenderer>().sharedMaterial = materialHealth50; break;
-            //    case < 8: landMasses.GetComponent<MeshRenderer>().sharedMaterial = materialHealth75; break;
-            //    default: landMasses.GetComponent<MeshRenderer>().sharedMaterial = materialHealth100; break;
-            //}
+            switch(Health){
+                case <= 0: landMasses.GetComponent<MeshRenderer>().sharedMaterial = materialHealth0; break;
+                case < 3: landMasses.GetComponent<MeshRenderer>().sharedMaterial = materialHealth25; break;
+                case < 6: landMasses.GetComponent<MeshRenderer>().sharedMaterial = materialHealth50; break;
+                case < 8: landMasses.GetComponent<MeshRenderer>().sharedMaterial = materialHealth75; break;
+                default: landMasses.GetComponent<MeshRenderer>().sharedMaterial = materialHealth100; break;
+            }
             
             // Get all current hearts
             GameObject[] hearts = GameObject.FindGameObjectsWithTag("Heart");
